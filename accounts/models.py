@@ -8,3 +8,5 @@ class User(AbstractUser):
     last_name = None
     email = models.EmailField()
     
+class Article(models.Model):
+    pass
