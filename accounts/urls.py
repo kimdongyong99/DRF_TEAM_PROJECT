@@ -12,4 +12,5 @@ urlpatterns = [
     path("token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
     path("signup/", views.UserCreate.as_view(), name="UserCreate"),
     path("logout/", TokenBlacklistView.as_view(), name='logout'),
+    path("profile/<str:username>/",views.UserProfileView.as_view())
 ]
