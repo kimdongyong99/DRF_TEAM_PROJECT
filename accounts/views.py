@@ -37,5 +37,5 @@ class UserProfileView(APIView):
                 user.set_password(new_password)
                 user.save()
             return Response(
-                {"detail": "정보수정이 완료되었습니다"}, status=status.HTTP_200_OK
+                {"detail": "정보수정이 완료되었습니다"}, status=200
             )
