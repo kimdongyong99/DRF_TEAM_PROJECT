@@ -1,17 +1,12 @@
-# from django.db import models
-# from accounts.models import User
+from django.db import models
 
-# 작성한 뉴스, 좋아요한 뉴스
-# class Article(models.Model):   
-#     title = 
-#     content = 
-#     image = (null=True, blank=True)
 
-#     like_articles = models.ManyToManyField(User, related_name="likearticle")
-    
-    
-# class Comment(models.Model):
-#     pass
+class Article(models.Model):
+    title = models.CharField(max_length=255)
+    content = models.TextField()
+    image = models.ImageField(upload_to="uploads/", null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
-#     like_comment = models.ManyToManyField(User,related_name="likecomment")
-# #좋아요한 댓글 
+    def __str__(self):
+        return self.title
