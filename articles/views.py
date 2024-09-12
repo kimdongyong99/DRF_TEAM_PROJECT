@@ -13,6 +13,7 @@ from django.shortcuts import get_object_or_404
 class ArticleListView(ListCreateAPIView):
     queryset = Article.objects.all().order_by("-pk")
 
+
     def get_serializer_class(self):
         if self.request.method == "GET":
             return ArticleListSerializer

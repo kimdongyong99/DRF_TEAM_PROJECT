@@ -7,7 +7,7 @@ from .models import User
 
 # from articles.models import Article
 from .serializers import Userserializers, UserProfileSerializer, UserChangeSerializer
-
+from .validata import passwordValidation
 
 class UserCreate(CreateAPIView):
     queryset = User.objects.all()
@@ -24,9 +24,12 @@ class UserProfileView(APIView):
 
     def put(self, request, username):
         new_password = request.data.get("new_password")
+        if not passwordValidation(new_password):
+            return Response({'error':'비밀번호는 최소 8자이상 1개 이상의 특수문자, 숫자가 포함되어야 함'}, status=400)
         varify_password = request.data.get("varify_password")
         if new_password != varify_password:
             return Response({"error": "비밀번호가 일치하지 않습니다"}, status=400)
+
         user = get_object_or_404(User, username=username)
         serializers = UserChangeSerializer(
             request.user, data=request.data, partial=True
@@ -37,5 +40,5 @@ class UserProfileView(APIView):
                 user.set_password(new_password)
                 user.save()
             return Response(
-                {"detail": "정보수정이 완료되었습니다"}, status=status.HTTP_200_OK
+                {"detail": "정보수정이 완료되었습니다"}, status=200
             )
