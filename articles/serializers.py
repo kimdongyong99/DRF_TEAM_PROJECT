@@ -8,7 +8,13 @@ class ArticleListSerializer(serializers.ModelSerializer):
         fields = ["image", "title"]
 
 
-class ArticleCreateSerializer(serializers.ModelSerializer):
+class ArticleCreateUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Article
         fields = ["image", "title", "content"]
+
+
+class ArticleDetailSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Article
+        fields = "__all__"
