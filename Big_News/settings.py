@@ -10,8 +10,9 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
+from datetime import timedelta
 from pathlib import Path
-from . import MY_SECRET_KEY
+from .my_settings import MY_SECRET_KEY
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -41,6 +42,7 @@ INSTALLED_APPS = [
     # third_app
     "django_seed",
     "rest_framework",
+    'rest_framework_simplejwt.token_blacklist',
     
     # local_app
     "accounts",
@@ -136,4 +138,11 @@ REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ],
+}
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=20),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+    'SIGNING_KEY': MY_SECRET_KEY,  # 또는 따로 설정한 시크릿 키가 있으면 그 값을 넣으세요.
+    'ALGORITHM': 'HS256',  # 사용하고 있는 알고리즘을 확인
 }
