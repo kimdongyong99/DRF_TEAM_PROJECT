@@ -26,3 +26,14 @@ class Userserializers(serializers.ModelSerializer):
         model = User
         fields = ['username', 'email', 'password', 'checkpassword']
         
+        
+class UserProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['username', 'email']
+        
+
+class UserChangeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User 
+        fields = ['image_field', 'email']
