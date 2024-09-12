@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     # third_app
     "django_seed",
-    "'rest_framework',"
+    "rest_framework",
+    
     # local_app
     "accounts",
     "articles",
