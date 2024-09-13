@@ -1,7 +1,8 @@
 from .models import User
+from articles.models import Article, Comment
 from rest_framework import serializers
 from django.contrib.auth.password_validation import validate_password
-
+from articles.serializers import ArticleListSerializer, CommentSerializer
 
 class Userserializers(serializers.ModelSerializer):
     password = serializers.CharField(
@@ -30,18 +31,29 @@ class Userserializers(serializers.ModelSerializer):
 
 
 class UserProfileSerializer(serializers.ModelSerializer):
+    articles = serializers.SerializerMethodField()
+    like_articles = serializers.SerializerMethodField()
+    like_comments= serializers.SerializerMethodField()
+    
     class Meta:
         model = User
-        fields = ["username", "email", "image_field"]
-
-
+        
+    def get_articles(self, obj):
+        articles = Article.objects.filter(author=obj)
+        return ArticleListSerializer(articles, many=True).data
+    
+    def get_like_articels(self, obj):
+        like_articles = obj.like_articles.all()
+        return ArticleListSerializer(like_articles, many=True).data
+    
+    def get_like_comments(self, obj):
+        like_comments = obj.like_comments.all()
+        return CommentSerializer(like_comments, many=True).data
+    
+        fields = ['username', 'email', 'image_field', 'articles', 'like_articles', 'like_comment']
 class UserChangeSerializer(serializers.ModelSerializer):
     username = serializers.CharField(read_only=True)
 
     class Meta:
-        model = User
-        fields = [
-            "username",
-            "image_field",
-            "email",
-        ]
+        model = User 
+        fields = ['username', 'image_field', 'email', 'password']

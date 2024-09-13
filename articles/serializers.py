@@ -1,5 +1,6 @@
 from rest_framework import serializers
-from .models import Article,Comment
+from .models import Article, Comment
+from accounts.models import User
 
 
 class ArticleListSerializer(serializers.ModelSerializer):
@@ -29,3 +30,7 @@ class CommentCreateUpdateSerializer(serializers.ModelSerializer):
         model = Comment
         fields = ["author", 'content']
     
+class CommentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Comment
+        fields = ['content', 'article']
