@@ -6,17 +6,21 @@ from rest_framework.generics import (
     CreateAPIView,
     DestroyAPIView,
     UpdateAPIView)
+from rest_framework.views import APIView
 from .serializers import (
     ArticleListSerializer,
     ArticleCreateUpdateSerializer,
     ArticleDetailSerializer,
     CommentListSerializer,
     CommentCreateUpdateSerializer,
+    ArticleLikeSerializer,
+    CommentLikeSerializer,
+
 )
 from django.shortcuts import get_object_or_404
+from rest_framework.response import Response
+from rest_framework import status
 
-
-# Create your views here.
 class ArticleListView(ListCreateAPIView):
     queryset = Article.objects.all().order_by("-pk")
 
@@ -39,6 +43,26 @@ class ArticleDetailView(RetrieveUpdateDestroyAPIView):
         elif self.request.method == "PUT":
             return ArticleCreateUpdateSerializer
 
+
+class ArticleLikeView(APIView):
+    def get(self, request, article_pk):
+        article = get_object_or_404(Article, pk=article_pk)
+        likes_count = article.likes.count()
+        
+        serializer = ArticleLikeSerializer(article)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    
+    def post(self, request, article_pk):
+        article = get_object_or_404(Article, pk=article_pk)
+        if request.user in article.likes.all():
+            article.likes.remove(request.user)
+            return Response({"message": "좋아요 취소", "like_count": article.likes.count()}, status=status.HTTP_200_OK)
+        else:
+            article.likes.add(request.user)
+            return Response({"message": "좋아요", "like_count": article.likes.count()}, status=status.HTTP_200_OK)
+    
+
+        
 class CommentListCreateView(ListCreateAPIView):
     queryset = Comment.objects.all().order_by("-pk")
     serializer_class = CommentListSerializer
@@ -49,7 +73,6 @@ class CommentListCreateView(ListCreateAPIView):
         serializer.save(author = author, article = article)
 
 
-
 class CommentUpdateDeleteView(UpdateAPIView,DestroyAPIView):
     queryset = Comment.objects.all()
     lookup_field = "pk"
@@ -57,3 +80,21 @@ class CommentUpdateDeleteView(UpdateAPIView,DestroyAPIView):
     def get_serializer_class(self):
         if self.request.method == "PUT":
             return CommentCreateUpdateSerializer
+        
+        
+class CommentLikeView(APIView):
+    def get(self, request, comment_pk):
+        comment = get_object_or_404(Article, pk=comment_pk)
+        serializer = CommentLikeSerializer(comment)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    
+    def post(self, request, comment_pk):
+        comment = get_object_or_404(Article, pk=comment_pk)
+        if request.user in Comment.likes.all():
+            comment.likes.remove(request.user)
+            return Response("unlike", status=status.HTTP_200_OK)
+        else:
+            comment.likes.add(request.user)
+            return Response("like", status=status.HTTP_200_OK)
+        
+    
