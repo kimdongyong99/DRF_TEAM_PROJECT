@@ -41,11 +41,14 @@ class ArticleDetailView(RetrieveUpdateDestroyAPIView):
 
 class CommentListCreateView(ListCreateAPIView):
     queryset = Comment.objects.all().order_by("-pk")
+    serializer_class = CommentListSerializer
 
-    def get_serializer_class(self):
-        if self.request.method == "GET":
-            return CommentListSerializer
-        return CommentCreateUpdateSerializer
+    def perform_create(self, serializer):
+        author = self.request.user
+        article = get_object_or_404(Article, pk=self.kwargs['pk'])
+        serializer.save(author = author, article = article)
+
+
 
 class CommentUpdateDeleteView(UpdateAPIView,DestroyAPIView):
     queryset = Comment.objects.all()
