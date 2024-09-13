@@ -30,10 +30,10 @@ class UserProfileView(APIView):
         if request.data.get("new_password") is not None :
             new_password = request.data.get("new_password")
             if not passwordValidation(new_password):
-                return Response({'error':'비밀번호는 최소 8자이상 1개 이상의 특수문자, 숫자가 포함되어야 함'}, status=400)
+                return Response({'Error':'비밀번호는 최소 8자이상 1개 이상의 특수문자, 숫자가 포함되어야 함'}, status=400)
             varify_password = request.data.get("varify_password")
             if new_password != varify_password:
-                return Response({"error": "비밀번호가 일치하지 않습니다"}, status=400)
+                return Response({"Error": "비밀번호가 일치하지 않습니다"}, status=400)
 
         user = get_object_or_404(User, username=username)
         serializers = UserChangeSerializer(request.user, data= request.data, partial=True)
@@ -47,7 +47,6 @@ class UserProfileView(APIView):
     def delete(self, request, username):
         user = get_object_or_404(User, username=username)
         if request.user != user and not request.user.is_superuser:
-            return Response({"error": "삭제 권한이 없습니다."}, status=403)
-        # user.delete()
+            return Response({"Error": "삭제 권한이 없습니다."}, status=403)
         user.is_active = False
         return Response({"message": "회원탈퇴가 완료되었습니다."}, status=204)
