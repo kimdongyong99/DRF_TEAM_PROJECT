@@ -15,12 +15,6 @@ class ArticleCreateUpdateSerializer(serializers.ModelSerializer):
         fields = ["image", "title", "content"]
 
 
-class ArticleDetailSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Article
-        fields = "__all__"
-
-
 class ArticleLikeSerializer(serializers.ModelSerializer):
     likes = serializers.StringRelatedField(many=True)
     likes_count = serializers.SerializerMethodField()
@@ -33,7 +27,17 @@ class ArticleLikeSerializer(serializers.ModelSerializer):
         fields = ["likes", "likes_count"]
 
 
+class ArticleDetailSerializer(ArticleLikeSerializer):
+    likes_count = serializers.SerializerMethodField()
 
+    def get_likes_count(self, obj):
+        return obj.likes.count()
+    
+    class Meta:
+        model = Article
+        fields = "__all__"
+        
+        
 class CommentListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
