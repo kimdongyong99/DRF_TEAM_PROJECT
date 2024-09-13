@@ -10,10 +10,11 @@ class Article(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     likes = models.ManyToManyField(User, related_name='like_articles', blank=True)
+    likes_count = models.PositiveIntegerField()
     
     def __str__(self):
         return self.title
-    
+
     
 class Comment(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='comment')

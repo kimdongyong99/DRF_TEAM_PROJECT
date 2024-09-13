@@ -8,6 +8,9 @@ urlpatterns = [
     path("<int:pk>/", views.ArticleDetailView.as_view(), name="article_detail"),
     path("<int:pk>/comment/", views.CommentListCreateView.as_view()),
     path("<int:pk>/comment/<int:comment_pk>", views.CommentUpdateDeleteView.as_view()),
+    path("<int:article_pk>/likes/", views.ArticleLikeView.as_view()),
+    path("<int:comment_pk>/comment/likes/", views.CommentLikeView.as_view()),
+    
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
