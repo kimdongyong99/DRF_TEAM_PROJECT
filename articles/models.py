@@ -9,7 +9,7 @@ class Article(models.Model):
     image = models.ImageField(upload_to="uploads/", null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    likes = models.ManyToManyField(User, related_name='like_articles', black=True)
+    likes = models.ManyToManyField(User, related_name='like_articles', blank=True)
     
     def __str__(self):
         return self.title
@@ -21,7 +21,7 @@ class Comment(models.Model):
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    likes = models.ManyToManyField(User, related_name='like_comments', black=True)
+    likes = models.ManyToManyField(User, related_name='like_comments', blank=True)
     
     def __str__(self):
         return self.content

@@ -37,12 +37,13 @@ class UserProfileSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = User
+        fields = ['username', 'email', 'image_field', 'articles', 'like_articles', 'like_comments']
         
     def get_articles(self, obj):
         articles = Article.objects.filter(author=obj)
         return ArticleListSerializer(articles, many=True).data
     
-    def get_like_articels(self, obj):
+    def get_like_articles(self, obj):
         like_articles = obj.like_articles.all()
         return ArticleListSerializer(like_articles, many=True).data
     
@@ -50,10 +51,13 @@ class UserProfileSerializer(serializers.ModelSerializer):
         like_comments = obj.like_comments.all()
         return CommentSerializer(like_comments, many=True).data
     
-        fields = ['username', 'email', 'image_field', 'articles', 'like_articles', 'like_comment']
+    
+    
+    
 class UserChangeSerializer(serializers.ModelSerializer):
     username = serializers.CharField(read_only=True)
+    
 
     class Meta:
         model = User 
-        fields = ['username', 'image_field', 'email', 'password']
+        fields = ['username', 'image_field', 'email']

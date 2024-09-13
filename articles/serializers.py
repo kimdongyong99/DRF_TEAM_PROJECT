@@ -16,6 +16,7 @@ class ArticleCreateUpdateSerializer(serializers.ModelSerializer):
 
 
 class ArticleDetailSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = Article
         fields = "__all__"

@@ -1,6 +1,8 @@
 import re
 
 def passwordValidation(pwd):
+    if pwd is None:
+        return False
 
     if len(pwd) < 8:
         return False
