@@ -15,7 +15,6 @@ class UserCreate(CreateAPIView):
 
 
 class UserProfileView(APIView):
-
     def get(self, request, username):
         user = get_object_or_404(User, username=username)
         serializers = UserProfileSerializer(user)
