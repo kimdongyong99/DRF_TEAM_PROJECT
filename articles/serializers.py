@@ -22,9 +22,10 @@ class ArticleDetailSerializer(serializers.ModelSerializer):
 class CommentListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
-        fields = ["author", 'content','create_at', 'update_at']
+        fields = ["author", 'content','created_at', 'updated_at']
 
 class CommentCreateUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
-        fields = 'content'
+        fields = ["author", 'content']
+    
