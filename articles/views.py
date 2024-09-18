@@ -15,25 +15,35 @@ from .serializers import (
     CommentListSerializer,
     CommentCreateUpdateSerializer,
     CommentLikeSerializer,
-
 )
 from django.shortcuts import get_object_or_404
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.pagination import PageNumberPagination
 from django.db.models import Q
+from django.db.models import Count
 
 class ArticleListView(ListCreateAPIView):
     pagination_class = PageNumberPagination
 
     def get_queryset(self):
         search = self.request.query_params.get("search")
+        order_by = self.request.query_params.get("order_by")
+        queryset = Article.objects.all()
+        
+        # 검색
         if search:
-            return Article.objects.filter(
+            return queryset.filter(
                 Q(title__icontains=search) | Q(content__icontains=search)
             )
-        return Article.objects.all().order_by("-pk")
-
+            
+        # 정렬
+        if order_by == 'likes':
+            queryset = queryset.annotate(likes_count=Count('likes')).order_by('-likes_count')
+        else: # 기본값은 최신순
+            queryset = queryset.order_by('-created_at')
+            
+        return queryset
 
 
     def get_serializer_class(self):
