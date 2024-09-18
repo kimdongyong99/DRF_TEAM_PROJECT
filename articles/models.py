@@ -10,6 +10,7 @@ class Article(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     likes = models.ManyToManyField(User, related_name='like_articles', blank=True)
+    likes_count = models.PositiveIntegerField(default=0)
     
     def __str__(self):
         return self.title
