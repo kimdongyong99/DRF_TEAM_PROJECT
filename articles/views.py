@@ -11,9 +11,9 @@ from .serializers import (
     ArticleListSerializer,
     ArticleCreateUpdateSerializer,
     ArticleDetailSerializer,
+    CommentSerializer,
     CommentListSerializer,
     CommentCreateUpdateSerializer,
-    ArticleLikeSerializer,
     CommentLikeSerializer,
 
 )
@@ -55,13 +55,27 @@ class ArticleDetailView(RetrieveUpdateDestroyAPIView):
             return ArticleCreateUpdateSerializer
 
 
+# class ArticleLikeView(APIView):
+#     def get(self, request, article_pk):
+#         article = get_object_or_404(Article, pk=article_pk)
+#         likes_count = article.likes.count()
+#         serializer = ArticleLikeSerializer(article)
+#         return Response(serializer.data, status=status.HTTP_200_OK)
+    
+#     def post(self, request, article_pk):
+#         article = get_object_or_404(Article, pk=article_pk)
+#         if request.user in article.likes.all():
+#             article.likes.remove(request.user)
+#             return Response({"message": "좋아요 취소", "like_count": article.likes.count()}, status=status.HTTP_200_OK)
+#         else:
+#             article.likes.add(request.user)
+#             return Response({"message": "좋아요", "like_count": article.likes.count()}, status=status.HTTP_200_OK)
+
 class ArticleLikeView(APIView):
     def get(self, request, article_pk):
         article = get_object_or_404(Article, pk=article_pk)
         likes_count = article.likes.count()
-        
-        serializer = ArticleLikeSerializer(article)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response({"likes_count": likes_count}, status=status.HTTP_200_OK)
     
     def post(self, request, article_pk):
         article = get_object_or_404(Article, pk=article_pk)
@@ -71,7 +85,7 @@ class ArticleLikeView(APIView):
         else:
             article.likes.add(request.user)
             return Response({"message": "좋아요", "like_count": article.likes.count()}, status=status.HTTP_200_OK)
-    
+
 
         
 class CommentListCreateView(ListCreateAPIView):
@@ -95,17 +109,18 @@ class CommentUpdateDeleteView(UpdateAPIView,DestroyAPIView):
         
 class CommentLikeView(APIView):
     def get(self, request, comment_pk):
-        comment = get_object_or_404(Article, pk=comment_pk)
+        comment = get_object_or_404(Comment, pk=comment_pk)
+        comment_count = comment.likes.count()
         serializer = CommentLikeSerializer(comment)
         return Response(serializer.data, status=status.HTTP_200_OK)
     
     def post(self, request, comment_pk):
-        comment = get_object_or_404(Article, pk=comment_pk)
-        if request.user in Comment.likes.all():
+        comment = get_object_or_404(Comment, pk=comment_pk)
+        if request.user in comment.likes.all():
             comment.likes.remove(request.user)
-            return Response("unlike", status=status.HTTP_200_OK)
+            return Response({"message": "좋아요 취소", "like_count": comment.likes.count()}, status=status.HTTP_200_OK)
         else:
             comment.likes.add(request.user)
-            return Response("like", status=status.HTTP_200_OK)
+            return Response({"message": "좋아요", "like_count": comment.likes.count()}, status=status.HTTP_200_OK)
         
     
