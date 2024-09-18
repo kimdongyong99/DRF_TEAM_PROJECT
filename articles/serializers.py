@@ -58,6 +58,11 @@ class ArticleDetailSerializer(serializers.ModelSerializer):
         ]
 
 
+class CommentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Comment
+        fields = ["content", "article"]
+
 # CommentListSerializer: 댓글 목록을 위한 간단한 Serializer
 class CommentListSerializer(serializers.ModelSerializer):
     class Meta:
