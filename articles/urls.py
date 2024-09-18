@@ -10,8 +10,8 @@ urlpatterns = [
     path("<int:pk>/comment/<int:comment_pk>", views.CommentUpdateDeleteView.as_view()),
     path("<int:article_pk>/likes/", views.ArticleLikeView.as_view()),
     path("<int:comment_pk>/comment/likes/", views.CommentLikeView.as_view()),
-    path('crawl/', crawler.Crawler.as_view(), name='crawl_news'),
-    
+    path("crawl/", crawler.CrawlerNews.as_view(), name="crawl_news"),
+    path("summarize/", crawler.ArticleSummarizer.as_view(), name="article_summarizer"),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

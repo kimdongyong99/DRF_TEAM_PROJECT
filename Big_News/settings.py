@@ -10,9 +10,10 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
-
 from datetime import timedelta
 from pathlib import Path
+from numpy.distutils.command.config import config
+from .config_key import OPENAI_API_KEY
 from .my_settings import MY_SECRET_KEY
 
 
@@ -25,6 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = MY_SECRET_KEY
+OPENAI_API_KEY = OPENAI_API_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -44,7 +46,6 @@ INSTALLED_APPS = [
     # third_app
     "django_seed",
     "rest_framework",
-    
     # local_app
     "accounts",
     "articles",
