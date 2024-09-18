@@ -9,10 +9,10 @@ from django.views import View
 from bs4 import BeautifulSoup
 from Big_News.config_key import OPENAI_API_KEY
 import requests
-import os
-from selenium.webdriver.chrome.service import Service
 from openai import OpenAI
 from django.urls import reverse
+
+client = OpenAI(api_key=OPENAI_API_KEY)
 
 
 class CrawlerNewsList(View):
@@ -37,9 +37,6 @@ class CrawlerNewsList(View):
                     title = title_tag.get("title", "No title")
                     news_info += f'<a href="{href}">{title}</a><br>'
         return news_info
-
-
-client = OpenAI(api_key=OPENAI_API_KEY)
 
 
 class WebDriverManager:
