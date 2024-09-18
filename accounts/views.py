@@ -7,7 +7,6 @@ from rest_framework.generics import CreateAPIView
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from .models import User
 
-# from articles.models import Article
 from .serializers import Userserializers, UserProfileSerializer, UserChangeSerializer
 from .validata import passwordValidation
 from articles.models import Article

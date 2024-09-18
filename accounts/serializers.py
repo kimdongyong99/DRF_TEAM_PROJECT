@@ -2,7 +2,7 @@ from .models import User
 from articles.models import Article, Comment
 from rest_framework import serializers
 from django.contrib.auth.password_validation import validate_password
-from articles.serializers import ArticleListSerializer, CommentSerializer
+from articles.serializers import ArticleListSerializer
 
 class Userserializers(serializers.ModelSerializer):
     password = serializers.CharField(
