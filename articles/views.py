@@ -33,9 +33,9 @@ class ArticleListView(ListCreateAPIView):
         
         # 검색
         if search:
-            return queryset.filter(
+            queryset = queryset.filter(
                 Q(title__icontains=search) | Q(content__icontains=search)
-            )
+    )
             
         # 정렬
         if order_by == 'likes':
