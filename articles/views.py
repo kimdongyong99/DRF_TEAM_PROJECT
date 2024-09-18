@@ -19,9 +19,20 @@ from .serializers import (
 from django.shortcuts import get_object_or_404
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.pagination import PageNumberPagination
+from django.db.models import Q
 
 class ArticleListView(ListCreateAPIView):
-    queryset = Article.objects.all().order_by("-pk")
+    pagination_class = PageNumberPagination
+
+    def get_queryset(self):
+        search = self.request.query_params.get("search")
+        if search:
+            return Article.objects.filter(
+                Q(title__icontains=search) | Q(content__icontains=search)
+            )
+        return Article.objects.all().order_by("-pk")
+
 
 
     def get_serializer_class(self):
