@@ -14,14 +14,10 @@
 </div>
 
 
-
-# ERD
-![ERD](static/image/ERD.png)
-
 # 프로젝트 소개
 스파르타 뉴스 API 서버를 DRF로 구현
 
-# 쉽죠? 팀과제
+# 쉽죠? 팀소개
 김동용(팀장),정성원(서기), 김나현(멤버), 임선오(멤버)
 
 
@@ -62,6 +58,29 @@ articles
 - 회원이 작성한 뉴스 조회
 - 회원이 좋아요한 뉴스 조회
 - 회원이 좋아요한 댓글 조회
+
+# 개발 기간
+9/11 ~ 9/19
+
+# 기술 스택
+- Django
+- Django REST Framework (DRF)
+- SQLite3
+- Google
+- PyCharm
+- VS Code
+- Python
+- GitHub
+
+# ERD
+![ERD](static/image/ERD.png)
+
+# 와이어 프레임
+
+![Big News (1)](https://github.com/user-attachments/assets/2e773fd6-62f5-4e08-81c5-850757e405ca)
+
+# API 명세서
+https://www.notion.so/SA-v-1-0-1-f9bd057767a54c828d2f53b0d03bab87?pvs=4#f9a586773a724ee59877783a7f9bb9ce
 
 
 # 트러블 슈팅
