@@ -14,7 +14,6 @@ from articles.models import Article
 class UserCreate(CreateAPIView):
     queryset = User.objects.all()
     serializer_class = Userserializers
-    
     permission_classes = [AllowAny]
     
 class UserProfileView(APIView):
@@ -49,3 +48,39 @@ class UserProfileView(APIView):
             return Response({"Error": "삭제 권한이 없습니다."}, status=403)
         user.is_active = False
         return Response({"message": "회원탈퇴가 완료되었습니다."}, status=204)
+    
+    
+class MyArticlesView(APIView):
+    def get(self, request, username):
+        if username:
+            user = User.objects.get(username=username)
+        else:
+            user = request.user
+
+        articles = Article.objects.filter(author=user)
+        serializer = ArticleSerializer(articles, many=True)
+        return Response(serializer.data)
+
+
+class MyLikedArticlesView(APIView):
+    def get(self, request, username):
+        if username:
+            user = User.objects.get(username=username)
+        else:
+            user = request.user
+
+        # 사용자가 좋아요한 기사 조회
+        liked_articles = request.user.like_articles.all()
+        serializer = ArticleSerializer(liked_articles, many=True)
+        return Response(serializer.data)
+
+class MyLikedCommentsView(APIView):
+    def get(self, request,username):
+        if username:
+            user = User.objects.get(username=username)
+        else:
+            user = request.user
+        # 사용자가 좋아요한 댓글 조회
+        liked_comments = request.user.like_comments.all()
+        serializer = CommentSerializer(liked_comments, many=True)
+        return Response(serializer.data)
