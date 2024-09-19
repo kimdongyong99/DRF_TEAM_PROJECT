@@ -88,7 +88,7 @@ articles
 - related_name이 충돌 됬을때 발생하는 에러이다
   
 ![image](https://github.com/user-attachments/assets/265b6646-5b75-4266-b381-d485264eb38b)
-	-  해결: Models에서 related_name을 겹치지 않게 다시 정의하여 해결하였다 
+	-  해결: .Models에서 각 model을 확인하여 related_name을 겹치지 않게 다시 정의하여 해결하였다 
 
 - article_pk라는 필드명을 사용했지만, Article 모델에 article_pk라는 필드가 존재하지 않아서 발생한 오류이다.
   
