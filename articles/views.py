@@ -25,7 +25,11 @@ from rest_framework import status
 from rest_framework.pagination import PageNumberPagination
 from django.db.models import Q
 from django.db.models import Count
-from rest_framework.permissions import AllowAny, IsAuthenticatedOrReadOnly, IsAuthenticated
+from rest_framework.permissions import (
+    AllowAny,
+    IsAuthenticatedOrReadOnly,
+    IsAuthenticated,
+)
 
 
 class ArticleListView(ListCreateAPIView):
@@ -75,6 +79,7 @@ class ArticleDetailView(RetrieveUpdateDestroyAPIView):
 
 class ArticleLikeView(APIView):
     permission_classes = [IsAuthenticated]
+
     def get(self, request, article_pk):
         article = get_object_or_404(Article, pk=article_pk)
         likes_count = article.likes.count()
@@ -119,6 +124,7 @@ class CommentUpdateDeleteView(UpdateAPIView, DestroyAPIView):
 
 class CommentLikeView(APIView):
     permission_classes = [IsAuthenticated]
+
     def get(self, request, comment_pk):
         comment = get_object_or_404(Comment, pk=comment_pk)
         comment_count = comment.likes.count()
