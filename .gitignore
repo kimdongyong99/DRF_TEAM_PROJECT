@@ -1,5 +1,5 @@
 my_settings.py
-
+config_key.py
 # Created by https://www.toptal.com/developers/gitignore/api/python,pycharm,visualstudiocode,venv,database,windows,macos,django
 # Edit at https://www.toptal.com/developers/gitignore?templates=python,pycharm,visualstudiocode,venv,database,windows,macos,django
 
@@ -481,3 +481,4 @@ $RECYCLE.BIN/
 
 # End of https://www.toptal.com/developers/gitignore/api/python,pycharm,visualstudiocode,venv,database,windows,macos,django
 
+.idea
