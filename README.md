@@ -80,7 +80,7 @@ articles
 ![Big News (1)](https://github.com/user-attachments/assets/2e773fd6-62f5-4e08-81c5-850757e405ca)
 
 # API 명세서
-https://www.notion.so/SA-v-1-0-1-f9bd057767a54c828d2f53b0d03bab87?pvs=4#f9a586773a724ee59877783a7f9bb9ce
+[API 명세서 조회] (https://www.notion.so/68400ebc525049998368d7c0059d9393?pvs=21)
 
 
 # 트러블 슈팅
