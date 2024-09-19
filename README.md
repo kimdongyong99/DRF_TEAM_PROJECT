@@ -1,4 +1,16 @@
-# DRF_TEAM_PROJECT
+<img src="https://capsule-render.vercel.app/api?type=waving&color=auto&height=200&section=header&text=spartamarket_DRF&fontSize=90" />
+
+<div align=center>
+	<h3>📚 Tech Stack 📚</h3>
+</div>
+<div align="center">
+	<img src="https://img.shields.io/badge/django-092E20?style=flat&logo=django&logoColor=white" />
+	<img src="https://img.shields.io/badge/sqlite-003B57?style=plastic&logo=sqlite&logoColor=white" />
+	<img src="https://img.shields.io/badge/python-3776AB?style=flat&logo=python&logoColor=white" />
+	<img src="https://img.shields.io/badge/pycharm-000000?style=flat&logo=pycharm&logoColor=white" />
+	<img src="https://img.shields.io/badge/github-181717?style=flat&logo=github&logoColor=white" />
+	<img src="https://img.shields.io/badge/google-4285F4?style=flat&logo=google&logoColor=white" />
+</div>
 
 
 
