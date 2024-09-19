@@ -27,14 +27,18 @@ from django.db.models import Q
 from django.db.models import Count
 from rest_framework.permissions import (
     AllowAny,
-    IsAuthenticatedOrReadOnly,
     IsAuthenticated,
 )
+from .permissions import IsOwnerOrReadOnly
 
 
 class ArticleListView(ListCreateAPIView):
     pagination_class = PageNumberPagination
-    permission_classes = [AllowAny]
+
+    def get_permissions(self):
+        if self.request.method == "GET":
+            return [AllowAny()]
+        return [IsAuthenticated()]
 
     def get_queryset(self):
         search = self.request.query_params.get("search")
@@ -62,9 +66,12 @@ class ArticleListView(ListCreateAPIView):
             return ArticleListSerializer
         return ArticleCreateUpdateSerializer
 
+    def perform_create(self, serializer):
+        serializer.save(author=self.request.user)
+
 
 class ArticleDetailView(RetrieveUpdateDestroyAPIView):
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [IsOwnerOrReadOnly]
     queryset = Article.objects.all()
     lookup_field = "pk"
 
@@ -102,7 +109,7 @@ class ArticleLikeView(APIView):
 
 
 class CommentListCreateView(ListCreateAPIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsOwnerOrReadOnly]
     queryset = Comment.objects.all().order_by("-pk")
     serializer_class = CommentListSerializer
 
@@ -113,7 +120,7 @@ class CommentListCreateView(ListCreateAPIView):
 
 
 class CommentUpdateDeleteView(UpdateAPIView, DestroyAPIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsOwnerOrReadOnly]
     queryset = Comment.objects.all()
     lookup_field = "pk"
 
