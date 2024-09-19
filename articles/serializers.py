@@ -77,3 +77,14 @@ class CommentCreateUpdateSerializer(serializers.ModelSerializer):
         fields = ["author", "content"]
 
         read_only_fields = ["author"]
+
+
+class ArticleSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Article
+        fields = ["author", "title", "content"]
+
+class CommentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Comment
+        fields = ["author", "article", "content"]
