@@ -65,3 +65,6 @@ articles
 
 # 트러블 슈팅
 
+- git repositories 작성 후 최초 push 할때 소통문제로 인해 SECRET_KEY가 들어있는 파일도 함께 git에 올라감 
+    
+    - 해결: 어쩔수없이 ewpositories를 제거 후 다시 시작
