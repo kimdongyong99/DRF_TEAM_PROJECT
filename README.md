@@ -83,7 +83,18 @@ articles
 [API 명세서 조회] (https://www.notion.so/68400ebc525049998368d7c0059d9393?pvs=21)
 
 
+
 # 트러블 슈팅
+
+![image](https://github.com/user-attachments/assets/265b6646-5b75-4266-b381-d485264eb38b)
+-related_name이 충돌 됬을때 발생하는 에러이다 related_name을 겹치지 않게 다시 정의하여 해결하였다 
+
+![image](https://github.com/user-attachments/assets/d3db843e-5b53-4ed4-ada8-ff0da8db0600)
+
+article_pk라는 필드명을 사용했지만, Article 모델에 article_pk라는 필드가 존재하지 않아서 발생한 오류이다.
+Django는 모델에서 자동으로 id 필드를 생성하므로,article_pk 대신 id를 사용해야한다.
+
+
 
 - git repositories 작성 후 최초 push 할때 소통문제로 인해 SECRET_KEY가 들어있는 파일도 함께 git에 올라감 
     ![git에 시크릿키 노출](https://github.com/user-attachments/assets/43cadd42-9452-4c2c-b0ca-abac60684320)
