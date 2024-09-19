@@ -1,4 +1,4 @@
-![git에 시크릿키 노출](https://github.com/user-attachments/assets/3f2088fb-d166-4083-b3d8-3ebf8caf5f7f)<img src="https://capsule-render.vercel.app/api?type=waving&color=auto&height=200&section=header&text=spartamarket_DRF&fontSize=90" />
+<img src="https://capsule-render.vercel.app/api?type=waving&color=auto&height=200&section=header&text=spartamarket_DRF&fontSize=90" />
 
 <div align=center>
 	<h3>📚 Tech Stack 📚</h3>
