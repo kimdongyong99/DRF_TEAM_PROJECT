@@ -1,4 +1,4 @@
-<img src="https://capsule-render.vercel.app/api?type=waving&color=auto&height=200&section=header&text=spartamarket_DRF&fontSize=90" />
+![git에 시크릿키 노출](https://github.com/user-attachments/assets/3f2088fb-d166-4083-b3d8-3ebf8caf5f7f)<img src="https://capsule-render.vercel.app/api?type=waving&color=auto&height=200&section=header&text=spartamarket_DRF&fontSize=90" />
 
 <div align=center>
 	<h3>📚 Tech Stack 📚</h3>
@@ -66,5 +66,5 @@ articles
 # 트러블 슈팅
 
 - git repositories 작성 후 최초 push 할때 소통문제로 인해 SECRET_KEY가 들어있는 파일도 함께 git에 올라감 
-    
+    ![git에 시크릿키 노출](https://github.com/user-attachments/assets/43cadd42-9452-4c2c-b0ca-abac60684320)
     - 해결: 어쩔수없이 ewpositories를 제거 후 다시 시작
