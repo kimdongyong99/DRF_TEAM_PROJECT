@@ -1,7 +1,7 @@
 <img src="https://capsule-render.vercel.app/api?type=waving&color=auto&height=200&section=header&text=spartamarket_DRF&fontSize=90" />
 
 <div align=center>
-	<h3>📚 Tech Stack 📚</h3>
+<h3>📚 Tech Stack 📚</h3>
 </div>
 <div align="center">
 	<img src="https://img.shields.io/badge/django-092E20?style=flat&logo=django&logoColor=white" />
