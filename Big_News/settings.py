@@ -28,7 +28,7 @@ SECRET_KEY = MY_SECRET_KEY
 OPENAI_API_KEY = OPENAI_API_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["43.203.200.152", "localhost", "127.0.0.1"]
 
