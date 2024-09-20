@@ -14,7 +14,6 @@ from datetime import timedelta
 from pathlib import Path
 from .config_key import OPENAI_API_KEY
 from .my_settings import MY_SECRET_KEY
-import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 
@@ -130,7 +129,7 @@ USE_TZ = True
 
 STATIC_URL = "static/default/"
 STATICFILES_DIRS = [BASE_DIR / "static"]
-STATIC_ROOT = BASE_DIR / "static"
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
