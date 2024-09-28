@@ -25,12 +25,20 @@ from rest_framework import status
 from rest_framework.pagination import PageNumberPagination
 from django.db.models import Q
 from django.db.models import Count
-from rest_framework.permissions import AllowAny, IsAuthenticatedOrReadOnly, IsAuthenticated
+from rest_framework.permissions import (
+    AllowAny,
+    IsAuthenticated,
+)
+from .permissions import IsOwnerOrReadOnly
 
 
 class ArticleListView(ListCreateAPIView):
     pagination_class = PageNumberPagination
-    permission_classes = [AllowAny]
+
+    def get_permissions(self):
+        if self.request.method == "GET":
+            return [AllowAny()]
+        return [IsAuthenticated()]
 
     def get_queryset(self):
         search = self.request.query_params.get("search")
@@ -58,9 +66,12 @@ class ArticleListView(ListCreateAPIView):
             return ArticleListSerializer
         return ArticleCreateUpdateSerializer
 
+    def perform_create(self, serializer):
+        serializer.save(author=self.request.user)
+
 
 class ArticleDetailView(RetrieveUpdateDestroyAPIView):
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [IsOwnerOrReadOnly]
     queryset = Article.objects.all()
     lookup_field = "pk"
 
@@ -75,6 +86,7 @@ class ArticleDetailView(RetrieveUpdateDestroyAPIView):
 
 class ArticleLikeView(APIView):
     permission_classes = [IsAuthenticated]
+
     def get(self, request, article_pk):
         article = get_object_or_404(Article, pk=article_pk)
         likes_count = article.likes.count()
@@ -97,7 +109,7 @@ class ArticleLikeView(APIView):
 
 
 class CommentListCreateView(ListCreateAPIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsOwnerOrReadOnly]
     queryset = Comment.objects.all().order_by("-pk")
     serializer_class = CommentListSerializer
 
@@ -108,7 +120,7 @@ class CommentListCreateView(ListCreateAPIView):
 
 
 class CommentUpdateDeleteView(UpdateAPIView, DestroyAPIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsOwnerOrReadOnly]
     queryset = Comment.objects.all()
     lookup_field = "pk"
 
@@ -119,6 +131,7 @@ class CommentUpdateDeleteView(UpdateAPIView, DestroyAPIView):
 
 class CommentLikeView(APIView):
     permission_classes = [IsAuthenticated]
+
     def get(self, request, comment_pk):
         comment = get_object_or_404(Comment, pk=comment_pk)
         comment_count = comment.likes.count()
