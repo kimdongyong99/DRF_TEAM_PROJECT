@@ -12,8 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from datetime import timedelta
 from pathlib import Path
-from .config_key import OPENAI_API_KEY
-from .my_settings import MY_SECRET_KEY
+from .config_key import OPENAI_API_KEY, MY_SECRET_KEY
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 
